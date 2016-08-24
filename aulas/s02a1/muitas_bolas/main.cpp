@@ -170,7 +170,7 @@ int main()
         //processar todos com todas
         for(int x = 0; x < qtd; x++){
             for(int y = x + 1; y < qtd; y++){
-                //processar_colisao(sacola[x], sacola[y]);
+                processar_colisao(sacola[x], sacola[y]);
             }
         }
 
