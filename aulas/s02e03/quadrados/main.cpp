@@ -15,8 +15,8 @@ struct Elemento{
 int main()
 {
     int casa = 128;
-    int ncol = 10;
-    int nlin = 6;
+    int ncol = 3;
+    int nlin = 3;
     int largura = ncol * casa;
     int altura = nlin * casa;
 
@@ -33,9 +33,14 @@ int main()
     py.cor = sf::Color::Yellow;
 
     Elemento pedra;
-    pedra.x = 4 * casa;
-    pedra.y = 4 * casa;
+    pedra.x = 0 * casa;
+    pedra.y = 1 * casa;
     pedra.cor = sf::Color::White;
+
+    Elemento fruta;
+    fruta.x = 0 * casa;
+    fruta.y = 2 * casa;
+    fruta.cor = sf::Color::Red;
 
     Elemento poste;
     poste.x = 2 * casa;
@@ -47,8 +52,6 @@ int main()
         //inicio
         py.xold = py.x;
         py.yold = py.y;
-
-
 
         sf::Event evento;
         while(janela.pollEvent(evento)){
@@ -70,6 +73,7 @@ int main()
                 }
             }
         }
+
         //inicio
         if(py.x == largura || py.x < 0 ||
            py.y == altura || py.y < 0){
@@ -82,16 +86,19 @@ int main()
             py.x = py.xold;
         }
 
+        if(py.x == fruta.x && py.y == fruta.y){
+            do{
+                fruta.x = (rand() % ncol) * casa;
+                fruta.y = (rand() % nlin) * casa;
+            }while(fruta.x == poste.x && fruta.y == poste.y);
+        }
 
 
         //fim
 
         janela.clear();
 
-        //pintando py
-        sprite_py.setPosition(py.x, py.y);
-        //carimbo.setFillColor(py.cor);
-        janela.draw(sprite_py);
+
 
         //pintando bloco
         carimbo.setPosition(pedra.x, pedra.y);
@@ -103,7 +110,14 @@ int main()
         carimbo.setFillColor(poste.cor);
         janela.draw(carimbo);
 
+        carimbo.setPosition(fruta.x, fruta.y);
+        carimbo.setFillColor(fruta.cor);
+        janela.draw(carimbo);
 
+        //pintando py
+        sprite_py.setPosition(py.x, py.y);
+        //carimbo.setFillColor(py.cor);
+        janela.draw(sprite_py);
 
         janela.display();
     }
