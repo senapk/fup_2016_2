@@ -38,7 +38,7 @@ void inicializar(Cenario &cenario, int casa){
         Elem p;
         p.x = (i + 2) * casa;
         p.y = i * casa;
-        p.cor = sf::Color::White;
+        p.cor = sf::Color(rand() % 255, rand() % 255, rand() % 255);
         pedras.push_back(p);
     }
 }
@@ -54,7 +54,6 @@ void atualizar_posicao(Elem &elemento){
     elemento.xold = elemento.x;
     elemento.yold = elemento.y;
 }
-
 
 void desenhar_tudo(Cenario &cenario,
                    sf::Sprite &sprite_py, sf::RectangleShape &carimbo,
@@ -114,33 +113,29 @@ int main()
     Cenario cenario;
     auto &py = cenario.py;
     auto &pedras = cenario.pedras;
-    auto &fruta = cenario.fruta;
+    //auto &fruta = cenario.fruta;
 
     inicializar(cenario, casa);
 
     sf::RenderWindow janela(sf::VideoMode(ncol * casa, nlin * casa), "Super");
     while(janela.isOpen()){
-        //inicio
+
+        //ATUALIZAR POSICOES
         atualizar_posicao(py);
         for(auto &pedra : pedras)
             atualizar_posicao(pedra);
 
         sf::Event evento;
         while(janela.pollEvent(evento)){
-            if(evento.type == sf::Event::Closed){
+            if(evento.type == sf::Event::Closed)
                 janela.close();
-            }
-            if(evento.type == sf::Event::KeyPressed){
+            if(evento.type == sf::Event::KeyPressed)
                 movimentar(py, evento, casa);
-            }
         }
 
-        //inicio
-//        if(py.x == largura || py.x < 0 ||
-//            py.y == altura || py.y < 0){
-//            py.x = py.xold;
-//            py.y = py.yold;
-//        }
+        for(auto &peda : pedras){
+            empurrar(py, peda);
+        }
 
         for(int i = 0; i < (int) pedras.size() - 1; i++){
             for(int j = i + 1; j < (int) pedras.size(); j++){
@@ -149,24 +144,9 @@ int main()
             }
         }
 
-
         //fim
-
         janela.clear();
-
-//        for(auto &peda : pedras){
-//            empurrar(py, peda);
-//        }
-
-
-
-        ////        if(py.x == pedra.x && py.y == pedra.y){
-        ////            pedra.x += -py.xold + py.x;
-        ////            pedra.y += -py.yold + py.y;
-        ////        }
-
         desenhar_tudo(cenario, sprite_py, carimbo, janela);
-
         janela.display();
     }
     return 0;
