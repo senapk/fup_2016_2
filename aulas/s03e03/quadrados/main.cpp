@@ -137,8 +137,6 @@ int main()
             empurrar(py, peda);
         }
 
-        //esse código não funciona para mover todas as pedras
-        //foi corrigido do código da próxima aula
         for(int i = 0; i < (int) pedras.size() - 1; i++){
             for(int j = i + 1; j < (int) pedras.size(); j++){
                 empurrar(pedras[i], pedras[j]);
