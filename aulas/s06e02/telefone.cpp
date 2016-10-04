@@ -1,16 +1,12 @@
 #include <iostream>
-
 using namespace std;
-
 char transforma(char c){
 	string indices = "DGJMPTW";
-	for(int i = 0; i < indices.size(); i++)
+	for(int i = 0; i < (int)indices.size(); i++)
 		if(indices[i] > c){
 			return (i + 2);
 }
-	
 int main(){
-	
 	string palavra;
 	cin >> palavra;	
 	for(char c : palavra){
@@ -20,8 +16,6 @@ int main(){
 			cout << c;
 		else
 			cout << transforma(c);
-			
-			
 	}
 	return 0;
 }
