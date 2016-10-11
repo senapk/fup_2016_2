@@ -1,0 +1,4 @@
+3
+batata sabor ovo; 4; 5.50;
+ovo de batata; 6; 7.80;
+hovo holandes; 10; 90.0;

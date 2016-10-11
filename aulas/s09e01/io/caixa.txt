@@ -1,0 +1,4 @@
+Nome: batata sabor ovo, qtd: 4, preco: 5.5
+Nome: ovo de batata, qtd: 6, preco: 7.8
+Nome: hovo holandes, qtd: 10, preco: 90
+Valor do estoque 968.8
